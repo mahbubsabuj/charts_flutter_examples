@@ -56,66 +56,6 @@ class LineCharts extends StatelessWidget {
                 ),
               ),
             ),
-            // Card(
-            //   elevation: 24,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(5),
-            //     child: SizedBox(
-            //       height: 300,
-            //       child: GroupedTargetLine(key: key),
-            //     ),
-            //   ),
-            // ),
-            // Card(
-            //   elevation: 24,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(5),
-            //     child: SizedBox(
-            //       height: 300,
-            //       child: StackedHorizontal(key: key),
-            //     ),
-            //   ),
-            // ),
-            // Card(
-            //   elevation: 24,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(5),
-            //     child: SizedBox(
-            //       height: 300,
-            //       child: StackedTargetLine(key: key),
-            //     ),
-            //   ),
-            // ),
-            // Card(
-            //   elevation: 24,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(5),
-            //     child: SizedBox(
-            //       height: 300,
-            //       child: Horizontal(key: key),
-            //     ),
-            //   ),
-            // ),
-            // Card(
-            //   elevation: 24,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(5),
-            //     child: SizedBox(
-            //       height: 300,
-            //       child: HorizontalBarLabel(key: key),
-            //     ),
-            //   ),
-            // ),
-            // Card(
-            //   elevation: 24,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(5),
-            //     child: SizedBox(
-            //       height: 300,
-            //       child: SparkBar(key: key),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/scheduler.dart';
 import '../../models/random_sales_data.dart';
 
 class Points extends StatefulWidget {
@@ -16,6 +17,7 @@ class _PointsState extends State<Points> {
   RandomSalesData generateRandomData(int year) {
     return RandomSalesData(year: year, sales: Random().nextInt(5000));
   }
+
   static List<charts.Series<RandomSalesData, int>> _prepareChartData() {
     List<RandomSalesData> data = [];
     for (int year = 1; year <= 20; ++year) {
@@ -37,6 +39,22 @@ class _PointsState extends State<Points> {
     ];
   }
 
+  // num? _sliderDomainValue;
+  // String? _sliderDragState;
+  // Point<int>? _sliderPosition;
+  _onSliderChange(Point<int> point, dynamic domain, String roleId,
+      charts.SliderListenerDragState dragState) {
+    void rebuild(_) {
+      setState(() {
+        // _sliderDomainValue = (domain * 10).round() / 10;
+        // _sliderDragState = dragState.toString();
+        // _sliderPosition = point;
+      });
+    }
+
+    SchedulerBinding.instance.addPostFrameCallback(rebuild);
+  }
+
   @override
   void initState() {
     _chartData = _prepareChartData();
@@ -54,6 +72,8 @@ class _PointsState extends State<Points> {
         charts.ChartTitle(
           'Points Chart',
         ),
+        charts.Slider(
+            initialDomainValue: 1.0, onChangeCallback: _onSliderChange),
       ],
     );
   }

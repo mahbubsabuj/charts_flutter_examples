@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import '../../models/random_sales_data.dart';
 
-class DashPattern extends StatefulWidget {
-  const DashPattern({Key? key}) : super(key: key);
+class SegmentsChart extends StatefulWidget {
+  const SegmentsChart({Key? key}) : super(key: key);
 
   @override
-  State<DashPattern> createState() => _DashPatternState();
+  State<SegmentsChart> createState() => _SegmentsChartState();
 }
 
-class _DashPatternState extends State<DashPattern> {
+class _SegmentsChartState extends State<SegmentsChart> {
   List<charts.Series<RandomSalesData, int>> _chartData = [];
 
   RandomSalesData generateRandomData(int year) {

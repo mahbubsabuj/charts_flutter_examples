@@ -4,6 +4,35 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import '../../models/random_sales_data.dart';
 
+// class IconRenderer extends charts.SymbolRenderer {
+//   final IconData iconData;
+
+//   IconRenderer(this.iconData);
+
+//   @override
+//   Widget build(BuildContext context,
+//       {required Size size, required Color color, required bool isSelected}) {
+//     final Size size;
+//     final Color color;
+//     final bool isSelected;
+//     return SizedBox.fromSize(
+//         size: size, child: new Icon(iconData, color: color, size: 12.0));
+//   }
+// }
+
+class IconRenderer extends charts.CustomSymbolRenderer {
+  IconRenderer({required this.iconData});
+  final IconData iconData;
+  @override
+  Widget build(BuildContext context,
+      {Color? color, required Size size, bool enabled = true}) {
+    return SizedBox.fromSize(
+      size: size,
+      child: Icon(iconData, color: color, size: 12.0),
+    );
+  }
+}
+
 class StackedArea extends StatefulWidget {
   const StackedArea({Key? key}) : super(key: key);
 
@@ -50,7 +79,7 @@ class _StackedAreaState extends State<StackedArea> {
         domainFn: (RandomSalesData sales, _) => sales.year,
         measureFn: (RandomSalesData sales, _) => sales.sales,
         data: notebookSalesData,
-      )
+      )..setAttribute(charts.rendererIdKey, 'NotebookArea'),
     ];
   }
 
@@ -69,7 +98,14 @@ class _StackedAreaState extends State<StackedArea> {
       defaultRenderer: charts.LineRendererConfig(
         includeArea: true,
         stacked: true,
+        symbolRenderer: IconRenderer(iconData: Icons.circle_notifications),
       ),
+      customSeriesRenderers: [
+        charts.LineRendererConfig(
+          customRendererId: 'NotebookArea',
+          symbolRenderer: IconRenderer(iconData: Icons.desk),
+        )
+      ],
       domainAxis:
           const charts.NumericAxisSpec(viewport: charts.NumericExtents(1, 10)),
       behaviors: [

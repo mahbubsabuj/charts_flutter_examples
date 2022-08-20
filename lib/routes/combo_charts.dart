@@ -6,7 +6,7 @@ class ComboCharts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Combo Charts")),
+      appBar: AppBar(title: const Text("Combo Charts")),
     );
   }
 }

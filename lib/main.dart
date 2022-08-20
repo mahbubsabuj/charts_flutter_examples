@@ -24,6 +24,17 @@ class ChartsHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: const [
+          // IconButton(
+          //   onPressed: () => Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => Test(),
+          //     ),
+          //   ),
+          //   icon: const Icon(Icons.leaderboard_rounded),
+          // ),
+        ],
         title: const Text("Charts"),
       ),
       body: Padding(
@@ -90,16 +101,6 @@ class ChartsHome extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const TimeSeriesCharts(),
-                ),
-              ),
-            ),
-            ChartTile(
-              title: 'TreeMap Charts',
-              icon: Icons.waterfall_chart_sharp,
-              navigate: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const TreeMapCharts(),
                 ),
               ),
             ),

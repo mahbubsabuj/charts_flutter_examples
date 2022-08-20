@@ -69,7 +69,8 @@ class _StackedState extends State<Stacked> {
   Widget build(BuildContext context) {
     return charts.BarChart(
       _chartData,
-      animate: true,
+      animate: false,
+      defaultInteractions: true,
       animationDuration: const Duration(milliseconds: 500),
       barGroupingType: charts.BarGroupingType.stacked,
       behaviors: [
