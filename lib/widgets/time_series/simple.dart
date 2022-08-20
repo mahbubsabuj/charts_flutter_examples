@@ -16,7 +16,7 @@ class _SimpleState extends State<Simple> {
   List<charts.Series<TimeSeriesSales, DateTime>> _chartData = [];
   List<TimeSeriesSales> _generateRandomSalesData() {
     List<TimeSeriesSales> _sales = [];
-    for (int year = 2015; year <= 2015; ++year) {
+    for (int year = 2010; year <= 2015; ++year) {
       for (int month = 1; month <= 12; ++month) {
         for (int day = 1; day <= 28; ++day) {
           final int sales = Random().nextInt(5000);
@@ -70,8 +70,8 @@ class _SimpleState extends State<Simple> {
       ),
       // domainAxis: const charts.EndPointsTimeAxisSpec(),
       behaviors: [
+        charts.ChartTitle('Simple Time Series Chart'),
         charts.PanAndZoomBehavior(),
-        charts.ChartTitle('Simple Time Series Chart')
       ],
     );
   }

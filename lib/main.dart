@@ -4,7 +4,6 @@ import 'package:charts_flutter_examples/routes/line_charts.dart';
 import 'package:charts_flutter_examples/routes/pie_charts.dart';
 import 'package:charts_flutter_examples/routes/scatter_plot_charts.dart';
 import 'package:charts_flutter_examples/routes/time_series_charts.dart';
-import 'package:charts_flutter_examples/routes/treemap_charts.dart';
 import 'package:charts_flutter_examples/widgets/chart_tile.dart';
 import 'package:flutter/material.dart';
 
