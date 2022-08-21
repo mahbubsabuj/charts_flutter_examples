@@ -1,10 +1,12 @@
 import 'package:charts_flutter_examples/routes/bar_charts.dart';
 import 'package:charts_flutter_examples/routes/combo_charts.dart';
+import 'package:charts_flutter_examples/routes/fl_charts.dart';
 import 'package:charts_flutter_examples/routes/line_charts.dart';
 import 'package:charts_flutter_examples/routes/pie_charts.dart';
 import 'package:charts_flutter_examples/routes/scatter_plot_charts.dart';
 import 'package:charts_flutter_examples/routes/time_series_charts.dart';
 import 'package:charts_flutter_examples/widgets/chart_tile.dart';
+import 'package:charts_flutter_examples/widgets/ui/hawle_chart_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,18 +25,18 @@ class ChartsHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          // IconButton(
-          //   onPressed: () => Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => Test(),
-          //     ),
-          //   ),
-          //   icon: const Icon(Icons.leaderboard_rounded),
-          // ),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HawleChartPage(),
+              ),
+            ),
+            icon: const Icon(Icons.bar_chart),
+          ),
         ],
-        title: const Text("Charts"),
+        title: const Text("Charts Flutter Examples"),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
@@ -43,6 +45,16 @@ class ChartsHome extends StatelessWidget {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           children: [
+            ChartTile(
+              title: 'FL Charts',
+              icon: Icons.pie_chart,
+              navigate: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FLCharts(),
+                ),
+              ),
+            ),
             ChartTile(
               title: 'Bar Charts',
               icon: Icons.bar_chart,

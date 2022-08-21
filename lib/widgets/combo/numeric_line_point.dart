@@ -81,7 +81,7 @@ class _NumericLinePointState extends State<NumericLinePoint> {
       ],
       behaviors: [
         charts.ChartTitle(
-          'Numeric Line Bar Combo Chart',
+          'Numeric Line Point Combo Chart',
         ),
         charts.PanAndZoomBehavior(),
       ],
