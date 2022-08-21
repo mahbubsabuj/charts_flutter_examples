@@ -90,8 +90,22 @@ class _AreaLineState extends State<AreaLine> {
           'Area Line Chart',
         ),
         charts.SeriesLegend(position: charts.BehaviorPosition.bottom),
-        charts.PanAndZoomBehavior(panningCompletedCallback: () => print("YES")),
+        charts.PanAndZoomBehavior(panningCompletedCallback: () => {}),
         charts.SlidingViewport(),
+        // charts.DatumLegend(
+        //   outsideJustification: charts.OutsideJustification.startDrawArea,
+        //   cellPadding: const EdgeInsets.all(5),
+        //   position: charts.BehaviorPosition.bottom,
+        //   desiredMaxColumns: 5,
+        //   desiredMaxRows: 5,
+        // ),
+        // charts.SeriesLegend(
+        //   position: charts.BehaviorPosition.bottom,
+        //   horizontalFirst: false,
+        //   cellPadding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
+        //   showMeasures: true,
+        //   legendDefaultMeasure: charts.LegendDefaultMeasure.firstValue,
+        // ),
       ],
     );
   }

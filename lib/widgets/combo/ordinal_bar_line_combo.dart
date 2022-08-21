@@ -3,18 +3,18 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:charts_flutter_examples/models/sales.dart';
 import 'package:flutter/material.dart';
 
-class Grouped extends StatefulWidget {
-  const Grouped({Key? key}) : super(key: key);
+class OrdinalBarLineCombo extends StatefulWidget {
+  const OrdinalBarLineCombo({Key? key}) : super(key: key);
 
   @override
-  State<Grouped> createState() => _GroupedState();
+  State<OrdinalBarLineCombo> createState() => _OrdinalBarLineComboState();
 }
 
-class _GroupedState extends State<Grouped> {
+class _OrdinalBarLineComboState extends State<OrdinalBarLineCombo> {
   List<charts.Series<Sales, String>> _chartData = [];
   static List<charts.Series<Sales, String>> _prepareChartData() {
     List<Sales> bangladesh = [], india = [], nepal = [];
-    for (int year = 1900; year <= 2022; ++year) {
+    for (int year = 1995; year <= 2022; ++year) {
       bangladesh.add(
         Sales(
           year: year.toString(),
@@ -48,14 +48,14 @@ class _GroupedState extends State<Grouped> {
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
         data: india,
-      ),
+      )..setAttribute(charts.rendererIdKey, 'IndiaCustomLine'),
       charts.Series<Sales, String>(
         id: 'Nepal',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
         data: nepal,
-      ),
+      )..setAttribute(charts.rendererIdKey, 'NepalCustomLine')
     ];
   }
 
@@ -67,21 +67,24 @@ class _GroupedState extends State<Grouped> {
 
   @override
   Widget build(BuildContext context) {
-    return charts.BarChart(
+    return charts.OrdinalComboChart(
       _chartData,
-      animate: true,
+      animate: false,
+      defaultInteractions: true,
       animationDuration: const Duration(milliseconds: 500),
-      barGroupingType: charts.BarGroupingType.grouped,
-      domainAxis: charts.OrdinalAxisSpec(
+      defaultRenderer: charts.BarRendererConfig(groupingType: charts.BarGroupingType.grouped),
+       domainAxis: charts.OrdinalAxisSpec(
         viewport: charts.OrdinalViewport('Bangladesh', 4),
       ),
-      // primaryMeasureAxis:  charts.PercentAxisSpec(),
+      customSeriesRenderers: [
+        charts.LineRendererConfig(customRendererId: 'NepalCustomLine'),
+        charts.LineRendererConfig(customRendererId: 'IndiaCustomLine'),
+      ],
       behaviors: [
         charts.ChartTitle(
-          'Grouped Bar Chart',
+          'Ordinal Bar Line Combo Chart',
         ),
         charts.PanAndZoomBehavior(),
-        charts.SlidingViewport(),
       ],
     );
   }
