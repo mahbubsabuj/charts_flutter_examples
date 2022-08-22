@@ -1,31 +1,18 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class LineChartExample extends StatefulWidget {
-  const LineChartExample(
-      {Key? key, required this.showBottomTitle, required this.chartData})
-      : super(key: key);
-  final bool showBottomTitle;
-  final List<FlSpot> chartData;
+class LineChartSample2 extends StatefulWidget {
+  const LineChartSample2({Key? key}) : super(key: key);
 
   @override
-  _LineChartExampleState createState() => _LineChartExampleState();
+  _LineChartSample2State createState() => _LineChartSample2State();
 }
 
-class _LineChartExampleState extends State<LineChartExample> {
+class _LineChartSample2State extends State<LineChartSample2> {
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
-    const Color(0xff23b6e6),
-    Colors.white,
+    const Color(0xff02d39a),
   ];
-  // final List<FlSpot> _chartData = [
-  //   const FlSpot(1, 3),
-  //   const FlSpot(2, 4),
-  //   const FlSpot(4, 7),
-  //   const FlSpot(6, 8),
-  //   const FlSpot(7, 9),
-  //   const FlSpot(7, 9)
-  // ];
 
   bool showAvg = false;
 
@@ -33,17 +20,20 @@ class _LineChartExampleState extends State<LineChartExample> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(18),
+        AspectRatio(
+          aspectRatio: 1.70,
+          child: Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(18),
+                ),
+                color: Color(0xff232d37)),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  right: 18.0, left: 12.0, top: 24, bottom: 12),
+              child: LineChart(
+                showAvg ? avgData() : mainData(),
               ),
-              color: Colors.white),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                right: 18.0, left: 12.0, top: 24, bottom: 12),
-            child: LineChart(
-              showAvg ? avgData() : mainData(),
             ),
           ),
         ),
@@ -57,7 +47,7 @@ class _LineChartExampleState extends State<LineChartExample> {
               });
             },
             child: Text(
-              '',
+              'avg',
               style: TextStyle(
                   fontSize: 12,
                   color:
@@ -70,36 +60,25 @@ class _LineChartExampleState extends State<LineChartExample> {
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    TextStyle style = TextStyle(
-      color: Colors.grey.shade400,
-      fontWeight: FontWeight.w400,
-      fontSize: 10.24,
+    const style = TextStyle(
+      color: Color(0xff68737d),
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
     );
     Widget text;
     switch (value.toInt()) {
-      case 1:
-        text = Text('S', style: style);
-        break;
       case 2:
-        text = Text('M', style: style);
-        break;
-      case 3:
-        text = Text('T', style: style);
-        break;
-      case 4:
-        text = Text('W', style: style);
+        text = const Text('MAR', style: style);
         break;
       case 5:
-        text = Text('T', style: style);
+        text = const Text('JUN', style: style);
         break;
-      case 6:
-        text = Text('F', style: style);
-        break;
-      case 7:
-        text = Text('S', style: style);
+      case 8:
+        text = const Text('SEP', style: style);
         break;
       default:
-        text = Text("");
+        text = const Text('', style: style);
+        break;
     }
 
     return SideTitleWidget(
@@ -113,7 +92,7 @@ class _LineChartExampleState extends State<LineChartExample> {
     const style = TextStyle(
       color: Color(0xff67727d),
       fontWeight: FontWeight.bold,
-      fontSize: 12,
+      fontSize: 15,
     );
     String text;
     switch (value.toInt()) {
@@ -136,8 +115,8 @@ class _LineChartExampleState extends State<LineChartExample> {
   LineChartData mainData() {
     return LineChartData(
       gridData: FlGridData(
-        show: false,
-        drawVerticalLine: false,
+        show: true,
+        drawVerticalLine: true,
         horizontalInterval: 1,
         verticalInterval: 1,
         getDrawingHorizontalLine: (value) {
@@ -154,7 +133,7 @@ class _LineChartExampleState extends State<LineChartExample> {
         },
       ),
       titlesData: FlTitlesData(
-        show: widget.showBottomTitle,
+        show: true,
         rightTitles: AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
@@ -164,14 +143,14 @@ class _LineChartExampleState extends State<LineChartExample> {
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            reservedSize: 20,
+            reservedSize: 30,
             interval: 1,
             getTitlesWidget: bottomTitleWidgets,
           ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: false,
+            showTitles: true,
             interval: 1,
             getTitlesWidget: leftTitleWidgets,
             reservedSize: 42,
@@ -179,19 +158,30 @@ class _LineChartExampleState extends State<LineChartExample> {
         ),
       ),
       borderData: FlBorderData(
-        show: true,
-        border: Border.all(color: const Color(0xff37434d), width: 0),
-      ),
+          show: true,
+          border: Border.all(color: const Color(0xff37434d), width: 1)),
+      minX: 0,
+      maxX: 11,
+      minY: 0,
+      maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: widget.chartData,
+          spots: const [
+            FlSpot(0, 3),
+            FlSpot(2.6, 2),
+            FlSpot(4.9, 5),
+            FlSpot(6.8, 3.1),
+            FlSpot(8, 4),
+            FlSpot(9.5, 3),
+            FlSpot(11, 4),
+          ],
           isCurved: true,
           gradient: LinearGradient(
             colors: gradientColors,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
-          barWidth: 2,
+          barWidth: 5,
           isStrokeCapRound: true,
           dotData: FlDotData(
             show: false,
@@ -202,8 +192,8 @@ class _LineChartExampleState extends State<LineChartExample> {
               colors: gradientColors
                   .map((color) => color.withOpacity(0.3))
                   .toList(),
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
             ),
           ),
         ),
@@ -276,36 +266,36 @@ class _LineChartExampleState extends State<LineChartExample> {
             FlSpot(11, 3.44),
           ],
           isCurved: true,
-          // gradient: const LinearGradient(
-          //   begin: Alignment.topRight,
-          //   end: Alignment.bottomLeft,
-          //   colors: [
-          //     Colors.yellow,
-          //     Colors.red,
-          //     Colors.indigo,
-          //     Colors.teal,
-          //   ],
-          // ),
+          gradient: LinearGradient(
+            colors: [
+              ColorTween(begin: gradientColors[0], end: gradientColors[1])
+                  .lerp(0.2)!,
+              ColorTween(begin: gradientColors[0], end: gradientColors[1])
+                  .lerp(0.2)!,
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
           barWidth: 5,
           isStrokeCapRound: true,
           dotData: FlDotData(
             show: false,
           ),
-          // belowBarData: BarAreaData(
-          //   show: true,
-          //   gradient: LinearGradient(
-          //     colors: [
-          //       ColorTween(begin: gradientColors[0], end: gradientColors[1])
-          //           .lerp(0.2)!
-          //           .withOpacity(0.1),
-          //       ColorTween(begin: gradientColors[0], end: gradientColors[1])
-          //           .lerp(0.2)!
-          //           .withOpacity(0.1),
-          //     ],
-          //     begin: Alignment.centerLeft,
-          //     end: Alignment.centerRight,
-          //   ),
-          // ),
+          belowBarData: BarAreaData(
+            show: true,
+            gradient: LinearGradient(
+              colors: [
+                ColorTween(begin: gradientColors[0], end: gradientColors[1])
+                    .lerp(0.2)!
+                    .withOpacity(0.1),
+                ColorTween(begin: gradientColors[0], end: gradientColors[1])
+                    .lerp(0.2)!
+                    .withOpacity(0.1),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
         ),
       ],
     );

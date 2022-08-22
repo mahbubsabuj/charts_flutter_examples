@@ -1,3 +1,4 @@
+import 'package:charts_flutter_examples/bloc/counter_bloc.dart';
 import 'package:charts_flutter_examples/routes/bar_charts.dart';
 import 'package:charts_flutter_examples/routes/combo_charts.dart';
 import 'package:charts_flutter_examples/routes/fl_charts.dart';
@@ -6,8 +7,12 @@ import 'package:charts_flutter_examples/routes/pie_charts.dart';
 import 'package:charts_flutter_examples/routes/scatter_plot_charts.dart';
 import 'package:charts_flutter_examples/routes/time_series_charts.dart';
 import 'package:charts_flutter_examples/widgets/chart_tile.dart';
+import 'package:charts_flutter_examples/widgets/ui/bloc_counter_example.dart';
+import 'package:charts_flutter_examples/widgets/ui/edit_profile.dart';
 import 'package:charts_flutter_examples/widgets/ui/hawle_chart_page.dart';
+import 'package:charts_flutter_examples/widgets/ui/verify_otp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(
@@ -30,10 +35,37 @@ class ChartsHome extends StatelessWidget {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const HawleChartPage(),
+                builder: (context) => HawleChartPage(),
               ),
             ),
             icon: const Icon(Icons.bar_chart),
+          ),
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BlocProvider<CounterBloc>(
+                      create: (context) => CounterBloc(), child: Counter())),
+            ),
+            icon: const Icon(Icons.pattern),
+          ),
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditProfile(),
+              ),
+            ),
+            icon: const Icon(Icons.person),
+          ),
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VerifyOTP(),
+              ),
+            ),
+            icon: const Icon(Icons.domain_verification),
           ),
         ],
         title: const Text("Charts Flutter Examples"),
@@ -107,6 +139,16 @@ class ChartsHome extends StatelessWidget {
             ),
             ChartTile(
               title: 'Time Series Charts',
+              icon: Icons.timeline,
+              navigate: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TimeSeriesCharts(),
+                ),
+              ),
+            ),
+            ChartTile(
+              title: 'UI',
               icon: Icons.timeline,
               navigate: () => Navigator.push(
                 context,

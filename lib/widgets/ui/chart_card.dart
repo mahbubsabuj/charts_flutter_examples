@@ -1,19 +1,22 @@
 import 'package:charts_flutter_examples/widgets/fl_line/line_chart.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class ChartCard extends StatelessWidget {
-  const ChartCard(
-      {Key? key,
-      required this.title,
-      required this.unitValue,
-      required this.unitName,
-      required this.icon,
-      required this.iconColor,
-      required this.borderColor,
-      required this.height,
-      required this.width,
-      required this.gradientColors})
-      : super(key: key);
+  const ChartCard({
+    Key? key,
+    required this.title,
+    required this.unitValue,
+    required this.unitName,
+    required this.icon,
+    required this.iconColor,
+    required this.borderColor,
+    required this.height,
+    required this.width,
+    required this.gradientColors,
+    required this.chartData,
+    required this.showTitle,
+  }) : super(key: key);
   final String title;
   final String unitValue;
   final String unitName;
@@ -22,6 +25,8 @@ class ChartCard extends StatelessWidget {
   final Color borderColor;
   final double height;
   final double width;
+  final bool showTitle;
+  final List<FlSpot> chartData;
   final List<Color> gradientColors;
 
   @override
@@ -102,7 +107,11 @@ class ChartCard extends StatelessWidget {
           Expanded(
             child: SizedBox(
               height: 200,
-              child: LineChartExample(key: key),
+              child: LineChartExample(
+                key: key,
+                showBottomTitle: showTitle,
+                chartData: chartData,
+              ),
             ),
           )
         ],

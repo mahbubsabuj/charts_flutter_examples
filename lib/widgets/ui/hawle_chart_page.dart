@@ -1,10 +1,28 @@
+import 'dart:ffi';
+
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'chart_card.dart';
 
 class HawleChartPage extends StatelessWidget {
-  const HawleChartPage({Key? key}) : super(key: key);
-
+  HawleChartPage({Key? key}) : super(key: key);
+  final List<FlSpot> _chartData = [
+    const FlSpot(1, 3),
+    const FlSpot(2, 4),
+    const FlSpot(4, 7),
+    const FlSpot(6, 8),
+    const FlSpot(7, 9),
+    const FlSpot(7, 9)
+  ];
+  final List<FlSpot> _tempChartData = [
+    const FlSpot(1, 3),
+    const FlSpot(2, 4),
+    const FlSpot(4, 7),
+    const FlSpot(6, 8),
+    const FlSpot(7, 9),
+    const FlSpot(7, 9)
+  ];
   @override
   Widget build(BuildContext context) {
     String dropdownValue = 'Last Week';
@@ -179,6 +197,8 @@ class HawleChartPage extends StatelessWidget {
                         ],
                         iconColor: Colors.green.shade500,
                         borderColor: Colors.green.shade500,
+                        showTitle: true,
+                        chartData: _chartData,
                       ),
                       ChartCard(
                         title: 'Pressure',
@@ -194,6 +214,8 @@ class HawleChartPage extends StatelessWidget {
                         ],
                         iconColor: Colors.red.shade500,
                         borderColor: Colors.red.shade500,
+                        showTitle: true,
+                        chartData: _chartData,
                       ),
                     ],
                   ),
@@ -213,6 +235,8 @@ class HawleChartPage extends StatelessWidget {
                       ],
                       iconColor: Colors.grey.shade700,
                       borderColor: Colors.green.shade500,
+                      showTitle: false,
+                      chartData: _chartData,
                     ),
                   ),
                 ],
